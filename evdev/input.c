@@ -311,6 +311,8 @@ ioctl_EVIOCG_bits(PyObject *self, PyObject *args)
         max = KEY_MAX; break;
     case EV_SW:
         max = SW_MAX; break;
+    case EV_ABS:
+	max = ABS_MAX; break;
     default:
         return NULL;
     }
@@ -331,6 +333,8 @@ ioctl_EVIOCG_bits(PyObject *self, PyObject *args)
     case EV_SW:
         ret = ioctl(fd, EVIOCGSW(sizeof(bytes)), &bytes);
         break;
+    case EV_ABS:
+	ret = ioctl(fd, EVIOCGABS(sizeof(bytes)), &bytes);
     }
 
     PyObject* res = PyList_New(0);
